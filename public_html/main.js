@@ -4,7 +4,7 @@ function CreateTableFromJSON() {
             console.log("ok");
             console.log(data);
             refresh(data);
-    })    
+    });  
  }
  
  function refresh(data) {
