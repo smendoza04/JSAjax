@@ -4,11 +4,11 @@ function CreateTable() {
             console.log("ok");
             console.log(data);
             refresh(data); //TABLE FUNCTION 
-            
     });  
  }
  
- function refresh(data) { //TABLE
+function refresh(data) { //TABLE
+
     // EXTRACT VALUE FOR HTML HEADER. 
     var title = ["Type", "Noise", "Battery", "Latitude", "Temperature", 
         "Last Modified", "Identifier", "Longitude", "Light", "URL"];
@@ -25,8 +25,7 @@ function CreateTable() {
             var th = document.createElement("th");      // TABLE HEADER.
             th.innerHTML = title[i];
             tr.appendChild(th);
-        }
-        
+        }  
     }
 
     // ADD JSON DATA TO THE TABLE AS ROWS.
@@ -34,12 +33,12 @@ function CreateTable() {
 
         tr = table.insertRow(-1);
 
-        for (var j in data.resources[i]) {
-            
+        for (var j in data.resources[i]) {         
             if (j !== "ayto:battery" && j !== "ayto:latitude" && j !== "ayto:longitude") {
                 var tabCell = tr.insertCell(-1);
                 tabCell.innerHTML = data.resources[i][j];
             }
+
         }
     }
 
