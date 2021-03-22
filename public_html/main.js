@@ -4,8 +4,15 @@ function CreateTable() {
             console.log("ok");
             console.log(data);
             refresh(data); //TABLE FUNCTION 
+            
+            // Load the Visualization API and the piechart package.
+    google.charts.load('current', {'packages':['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart(data));
+
     });  
- }
+}
  
 function refresh(data) { //TABLE
 
@@ -21,7 +28,7 @@ function refresh(data) { //TABLE
     var tr = table.insertRow(-1);                   // TABLE ROW.
 
     for (var i = 0; i < title.length; i++) {
-        if (title[i] != "Battery" && title[i] !== "Longitude" && title[i] !== "Latitude") {
+        if (title[i] !== "Battery" && title[i] !== "Longitude" && title[i] !== "Latitude") {
             var th = document.createElement("th");      // TABLE HEADER.
             th.innerHTML = title[i];
             tr.appendChild(th);
@@ -47,3 +54,15 @@ function refresh(data) { //TABLE
     divContainer.innerHTML = "";
     divContainer.appendChild(table);
 }  
+
+function drawChart(data) {
+
+        // Create our data table out of JSON data loaded from server.
+      
+      console.log("test",data);
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+      chart.draw(data, {width: 400, height: 240});
+    }
+
