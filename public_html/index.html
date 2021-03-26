@@ -13,12 +13,20 @@ and open the template in the editor.
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin=""/>
+         <!-- Make sure you put this AFTER Leaflet's CSS -->
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        accesskey="" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        async="" crossorigin=""></script>
 
     </head>
     <body>
         <input type="button" onclick="CreateTable()" value="Create Table From JSON" />
-        <p id="showData"></p>
-        <p id="chart_div"></p>
+        <div id="showData"></div>
+        <div id="chart_div"></div>
+        <div id="myMap" style="height: 600px;"></div>
         <script src="main.js"></script>
     </body>
 </html>

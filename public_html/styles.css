@@ -22,3 +22,5 @@ table, th, td {
 th {
     font-weight:bold;
 }
+
+#mapid { height: 180px; }

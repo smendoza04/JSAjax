@@ -6,9 +6,10 @@ function CreateTable() {
             console.log(data);
             
             refresh(data); //TABLE FUNCTION 
-            setData(data);
+            setData(data); //CHART DATA
             google.charts.load('current', {'packages':['corechart']});
             google.charts.setOnLoadCallback(drawChart);
+            mapData(data);
             }
         );  
 }
@@ -55,18 +56,17 @@ function refresh(data) { //TABLE
 
 function drawChart() {
     var data = google.visualization.arrayToDataTable(array);
-    
-        
-        console.log([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  -1000,      400],
-          ['2005',  1170.2,      460],
-          ['2006',  -660.0,       1120],
-          ['2007',  1030,      540]
-        ]);
+     
+//        console.log([
+//          ['Year', 'Sales', 'Expenses'],
+//          ['2004',  -1000,      400],
+//          ['2005',  1170.2,      460],
+//          ['2006',  -660.0,       1120],
+//          ['2007',  1030,      540]
+//        ]);
 
     var options = {
-      title: 'Sensores ambientales',
+      title: 'Sensores Ambientales',
       curveType: 'function',
       legend: { position: 'bottom' }
     };
@@ -76,7 +76,7 @@ function drawChart() {
     chart.draw(data, options);
 }
 
-var array = [['Year', 'Temperature', 'Light']];
+var array = [['Year', 'Temperature', 'Light']]; //CHART ARRAY
 
 function setData(data) {
 
@@ -85,7 +85,7 @@ function setData(data) {
     for(var i = 0; i <  data.resources.length; i++) {
         if (data.resources[i]["ayto:type"] == "WeatherObserved") {
   
-            var date = data.resources[i]["dc:modified"].substring(0,4)
+            var date = data.resources[i]["dc:modified"].substring(0,4);
             
             if (date in json) {
                 json[date]["temperature"] += parseFloat(data.resources[i]["ayto:temperature"]);
@@ -112,7 +112,28 @@ function setData(data) {
         array[Object.keys(json).indexOf(i) + 1 ] = [i, parseFloat((json[i].temperature / json[i].count).toFixed(2)),
             parseFloat((json[i].light / json[i].count).toFixed(2))];
     }
-    return array; 
 }
 
+function mapData(data){
+    
+    var dades = [];
+ 
+    for (var i = 0; i < data.resources.length; i++) {
+        dades[i] = [[data.resources[i]["ayto:latitude"], data.resources[i]["ayto:longitude"]]];
+    }
+    
+    console.log(dades);
+    
+    // PosiciÃ³ (latitud i longitud) inicial del mapa i nivell de Zoom aplicat.
+    const myMap = L.map("myMap").setView([43.46293, -3.80901], 14); //43.46293,-3.80901
 
+    // Tipus de vista que volem utilitzar i mÃ xim nivell de Zoom permÃ¨s.
+    L.tileLayer(`https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png`, {
+      maxZoom: 18,
+    }).addTo(myMap);
+
+    // Bucle per a recorrer l'array dades.
+    dades.forEach((element) => {
+      const marker = L.marker([element[0], element[1]]).addTo(myMap);
+    })
+};
