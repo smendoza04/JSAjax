@@ -85,21 +85,21 @@ function setData(data) {
     for(var i = 0; i <  data.resources.length; i++) {
         if (data.resources[i]["ayto:type"] == "WeatherObserved") {
   
-            var date = data.resources[i]["dc:modified"].substring(0,4);
+            var date = data.resources[i]["dc:modified"].substring(0,4); //GET THE YEAR ONLY
             
             if (date in json) {
-                json[date]["temperature"] += parseFloat(data.resources[i]["ayto:temperature"]);
-                if (isNaN(parseFloat(data.resources[i]["ayto:light"]))) {
+                json[date]["temperature"] += parseFloat(data.resources[i]["ayto:temperature"]); //LIST THE TEMPERATURE
+                if (isNaN(parseFloat(data.resources[i]["ayto:light"]))) { //CHECK IF LIGHT IS NULL OR NOT
                     json[date]["light"] += 0;
                 }
                 else {
                     json[date]["light"] += parseFloat(data.resources[i]["ayto:light"]);
                 }
                 json[date]["count"]++;
-                console.log(parseFloat(data.resources[i]["ayto:light"]));
+                //console.log(parseFloat(data.resources[i]["ayto:light"]));
             }
             else {
-                json[date] = {};
+                json[date] = {}; //CREATE ALL IF NOT CREATED
                 json[date]["temperature"] = 0;
                 json[date]["light"] = 0;
                 json[date]["count"] = 0;
@@ -108,7 +108,7 @@ function setData(data) {
         }     
     }    
     
-    for(var i in json) {
+    for(var i in json) { //CALCULATE THE MEDIAN OF EVERYTHING
         array[Object.keys(json).indexOf(i) + 1 ] = [i, parseFloat((json[i].temperature / json[i].count).toFixed(2)),
             parseFloat((json[i].light / json[i].count).toFixed(2))];
     }
@@ -119,10 +119,10 @@ function mapData(data){
     var dades = [];
  
     for (var i = 0; i < data.resources.length; i++) {
-        dades[i] = [[data.resources[i]["ayto:latitude"], data.resources[i]["ayto:longitude"]]];
+        dades[i] = [parseFloat(data.resources[i]["ayto:latitude"]), parseFloat(data.resources[i]["ayto:longitude"])];
     }
     
-    console.log(dades);
+    //console.log(dades);
     
     // PosiciÃ³ (latitud i longitud) inicial del mapa i nivell de Zoom aplicat.
     const myMap = L.map("myMap").setView([43.46293, -3.80901], 14); //43.46293,-3.80901
@@ -134,6 +134,7 @@ function mapData(data){
 
     // Bucle per a recorrer l'array dades.
     dades.forEach((element) => {
-      const marker = L.marker([element[0], element[1]]).addTo(myMap);
+        const marker = L.marker([element[0], element[1]]).addTo(myMap);
     })
+
 };
