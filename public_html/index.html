@@ -23,10 +23,27 @@ and open the template in the editor.
 
     </head>
     <body>
-        <input type="button" onclick="CreateTable()" value="Create Table From JSON" />
+        
+        <div id="myProgress">
+            <div id="myBar">0%</div>
+        </div>
+        
+        <ul id="buttons">
+            <li class="dropdown">
+                <a class="btn" onclick="CreateTable()">Table</a>
+                <div class="dropdown-content">
+                    <a onclick="CreateTableFilter('WeatherObserved')">Weather</a>
+                    <a onclick="CreateTableFilter('NoiseLevelObserved')">Noise</a>
+                </div>
+            </li>
+            <li><a class="btn" onclick="CreateGraph()">Graph</a></li>
+            <li><a class="btn" onclick="CreateMap()">Map</a></li>
+        </ul> 
+        
         <div id="showData"></div>
-        <div id="chart_div"></div>
-        <div id="myMap" style="height: 600px;"></div>
+        <div id="chartDiv"></div>
+        <div id="myMap"></div>
+        
         <script src="main.js"></script>
     </body>
 </html>

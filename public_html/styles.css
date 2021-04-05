@@ -7,8 +7,10 @@ and open the template in the editor.
     Created on : Mar 15, 2021, 8:19:26 PM
     Author     : alumne
 */
-
-th, td, p, input, h3 {
+body {
+    background-color: #f1f1f1;
+}
+* {
     font:15px 'Segoe UI';
 }
         
@@ -23,4 +25,75 @@ th {
     font-weight:bold;
 }
 
-#mapid { height: 180px; }
+#myMap { 
+    height: 500px; 
+}
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a{
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+/***/
+
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#myBar {
+  width: 10%;
+  height: 46px;
+  background-color: #333;
+  text-align: center;
+  line-height: 46px;
+  color: white;
+}
+
+/***/
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: #ddd;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
